@@ -23,4 +23,9 @@ public class Address {
 
     @Column(name = "home_number")
     private String homeNumber;
+
+    public Address(String street, String homeNumber) {
+        this.street = street;
+        this.homeNumber = homeNumber;
+    }
 }
