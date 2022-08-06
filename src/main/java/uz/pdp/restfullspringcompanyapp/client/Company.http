@@ -1,0 +1,30 @@
+###
+POST http://localhost:8080/api/company
+Content-Type: application/json
+
+{
+  "name": "Company name 3",
+  "director": "John Doe",
+  "street": "Tashkent sh",
+  "homeNumber": "23"
+}
+
+###
+PUT http://localhost:8080/api/company/id=1
+Content-Type: application/json
+
+{
+  "name": "Company name 2",
+  "director": "Mr. John Doe",
+  "street": "Tashkent sh, Chilonzor",
+  "homeNumber": "12-A"
+}
+
+###
+GET http://localhost:8080/api/company
+
+###
+GET http://localhost:8080/api/company/id=1
+
+###
+DELETE http://localhost:8080/api/company/id=1

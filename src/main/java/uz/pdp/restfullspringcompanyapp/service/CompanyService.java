@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import uz.pdp.restfullspringcompanyapp.exceptions.RecordNotFoundException;
 import uz.pdp.restfullspringcompanyapp.entity.Address;
 import uz.pdp.restfullspringcompanyapp.entity.Company;
 import uz.pdp.restfullspringcompanyapp.payload.CompanyDTO;
@@ -15,7 +16,6 @@ import java.util.Optional;
 
 import static java.lang.String.format;
 import static org.springframework.http.HttpStatus.CREATED;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.ResponseEntity.*;
 
 @Service
@@ -40,7 +40,8 @@ public class CompanyService {
 
     public ResponseEntity<?> getOneCompany(Integer companyId) {
         Optional<Company> optionalCompany = repository.findById(companyId);
-        if (!optionalCompany.isPresent()) return status(NOT_FOUND).body(format("Company id={%s} not found", companyId));
+        if (!optionalCompany.isPresent())
+            throw new RecordNotFoundException(format("Company id=%s not found", companyId));
         return ok(optionalCompany.get());
     }
 
@@ -52,7 +53,7 @@ public class CompanyService {
     public ResponseEntity<?> editCompany(Integer companyId, CompanyDTO dto) {
         Optional<Company> optionalCompany = repository.findById(companyId);
         if (!optionalCompany.isPresent())
-            return status(NOT_FOUND).body(format("Company id=[%s] not found.", companyId));
+            throw new RecordNotFoundException(format("Company id=%s not found", companyId));
         Company company = optionalCompany.get();
         company.setName(dto.getName());
         company.setDirector(dto.getDirector());
@@ -66,7 +67,8 @@ public class CompanyService {
 
     public ResponseEntity<?> deleteCompany(Integer companyId) {
         Optional<Company> optionalCompany = repository.findById(companyId);
-        if (!optionalCompany.isPresent()) return status(NOT_FOUND).body(format("Company id=[%s] not found.", companyId));
+        if (!optionalCompany.isPresent())
+            throw new RecordNotFoundException(format("Company id=%s not found", companyId));
         addressRepository.delete(optionalCompany.get().getAddress());
         repository.delete(optionalCompany.get());
         return ok("Company successfully deleted.");

@@ -1,0 +1,27 @@
+###
+POST http://localhost:8080/api/department
+Content-Type: application/json
+
+{
+  "name": "Department 1",
+  "companyId": 1
+}
+
+###
+PUT http://localhost:8080/api/department/id=1
+Content-Type: application/json
+
+{
+  "name": "NEW EDITABLE COMPANY",
+  "companyId": 2
+}
+
+###
+#  ?page=2&size=2
+GET http://localhost:8080/api/department
+
+###
+GET http://localhost:8080/api/department/id=1
+
+###
+DELETE http://localhost:8080/api/department/id=1

@@ -1,0 +1,36 @@
+###
+POST http://localhost:8080/api/worker
+Content-Type: application/json
+
+{
+  "name": "Worker 4",
+  "phoneNumber": "+998901234569",
+  "street": "Urganch",
+  "departmentsId": [
+    2
+  ]
+}
+
+###
+PUT http://localhost:8080/api/worker/id=1
+Content-Type: application/json
+
+{
+  "name": "Worker 3",
+  "phoneNumber": "+998901234599",
+  "street": "Urganch sh, Gastronome",
+  "homeNumber": "118A",
+  "departmentsId": [
+    2,
+    3
+  ]
+}
+
+###
+GET http://localhost:8080/api/worker
+
+###
+GET http://localhost:8080/api/worker/id=1
+
+###
+DELETE http://localhost:8080/api/worker/id=1

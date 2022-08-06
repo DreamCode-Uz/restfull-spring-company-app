@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -17,11 +16,9 @@ public class Worker {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull(message = "Worker name should not be null.")
     @Column(nullable = false)
     private String name;
 
-    @NotNull(message = "Phone number should not be null.")
     @Column(nullable = false,unique = true, name = "phone_number")
     private String phoneNumber;
 
